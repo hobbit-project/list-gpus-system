@@ -1,0 +1,10 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix hobbit: <http://w3id.org/hobbit/vocab#> .
+
+@prefix bench: <http://w3id.org/dice-research/string-function-benchmark/ontology#> .
+@prefix sys: <http://w3id.org/dice-research/list-gpus-system/ontology#> .
+
+<http://w3id.org/hobbit/experiments#New> a hobbit:Experiment ;
+                                         hobbit:involvesBenchmark bench:benchmark ;
+                                         hobbit:involvesSystemInstance sys:system ;
+                                         bench:input ""^^xsd:string .
