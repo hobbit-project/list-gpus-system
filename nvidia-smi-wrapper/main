@@ -1,0 +1,8 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use IO::Socket::INET;
+
+IO::Socket::INET->new(qw(Listen 1 Proto tcp LocalPort 5555))
+->accept
+->send(scalar `nvidia-smi --list-gpus 2>&1`)

@@ -1,3 +1,5 @@
+WRAPPER_IMAGE = git.project-hobbit.eu:4567/gitadmin/list-gpus-system/nvidia-smi-wrapper
+
 install-deps:
 	mvn validate
 
@@ -8,6 +10,7 @@ package:
 	mvn -DskipTests -DincludeDeps=true package
 
 build-images:
+	docker build -t $(WRAPPER_IMAGE) nvidia-smi-wrapper
 	mvn -Dtest=BenchmarkTest#buildImages surefire:test
 
 test-dockerized-benchmark:
@@ -15,9 +18,5 @@ test-dockerized-benchmark:
 
 
 push-images:
-	sudo docker push git.project-hobbit.eu:4567/sdk-examples/sdk-example-benchmark/benchmark-controller
-	sudo docker push git.project-hobbit.eu:4567/sdk-examples/sdk-example-benchmark/datagen
-	sudo docker push git.project-hobbit.eu:4567/sdk-examples/sdk-example-benchmark/taskgen
-	sudo docker push git.project-hobbit.eu:4567/sdk-examples/sdk-example-benchmark/eval-storage
-	sudo docker push git.project-hobbit.eu:4567/sdk-examples/sdk-example-benchmark/system-adapter
-	sudo docker push git.project-hobbit.eu:4567/sdk-examples/sdk-example-benchmark/eval-module
+	docker push $(WRAPPER_IMAGE)
+	docker push git.project-hobbit.eu:4567/gitadmin/list-gpus-system/system-adapter
